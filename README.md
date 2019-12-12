@@ -34,7 +34,7 @@ download or clone --> install required libs --> run interface.py --> customize t
 
 In the game, you can see all the clues and hints which I mentioned before. You can also restart game at any time. (Notice: if you restart the game with same parameter as last time, it will generate a random valid one.) After you think you finish, press submit, it will automatically check whether you are right. 
 
-4. core codes
+4. two parts of core codes
 a. Define the small hexagon cell as a class, store them as an edited list. (like a suqare been cut off the rightup and left down corner)
 ```
 class Hexagon:
@@ -109,3 +109,6 @@ def place(board, ship_list, i=0):
     return False
 
 ```
+I highly recommend you to play a small size board first because it can help you understand the rules and also this game is truely harder than your expected. I print the answer in the console every time you generating a game. GLHF!
+
+![ad](https://github.com/YishengSun/590PZ-Project/blob/master/example3.png)
