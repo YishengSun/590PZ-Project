@@ -11,3 +11,4 @@ Secondly, for each row and column, you can get a number which shows how many shi
 
 In addition, there will be some cells randomly chose which directly tell you what in that cell. You can know what it is based on the picture showed such as water, ship head, ship body or only a 1-part ship. For example, you can directly know there is a 1-part long ship in the left down corner of the board. 
  
+![ad](https://github.com/YishengSun/590PZ-Project/blob/master/example1.png)
