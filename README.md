@@ -13,7 +13,7 @@ Second, for each row and column, you can get a number which shows how many ship 
 
 In addition, there will be some cells randomly chose which directly tell you what in that cell. You can know what it is based on the picture showed such as water, ship head, ship body or only a 1-part ship. For example, you can directly know there is a 1-part long ship in the left down corner of the board. So if you are lucky enough, you can get more information of ship locations. If you are not, maybe you only get some water cells.
 
-[b]An important rule: 
+**An important rule: if a ship has been placed, the cells surrended the ship cannot be placed ship any more. This can be another important clue for players.**
  
 ![ad](https://github.com/YishengSun/590PZ-Project/blob/master/example1.png)
 
@@ -35,7 +35,8 @@ download or clone --> install required libs --> run interface.py --> customize t
 In the game, you can see all the clues and hints which I mentioned before. You can also restart game at any time. (Notice: if you restart the game with same parameter as last time, it will generate a random valid one.) After you think you finish, press submit, it will automatically check whether you are right. 
 
 4. core codes
-a. Define the small hexagon cell as a class, store them as a list, but because the hexgon property the 
+a. Define the small hexagon cell as a class, store them as an edited list. (like a suqare been cut off the rightup and left down corner)
+```
 class Hexagon:
     def __init__(self):
         self.x = 0
@@ -44,4 +45,67 @@ class Hexagon:
         # item = 100
         self.direction = -1  # The direction in which the boat is placed,-1 means no direction
         self.show = ". "
-   
+def init_board(n):
+    """
+    if we remove the top right corner and bottom left corner of a square, we can get the shape which can represent a
+    hexagon gameboard and we can use coordinates to represent each small hexagon.
+    :param n: number of hexagons for each border
+    :return:the hexagon gameboard described with squares
+    """
+    board = []
+    for i in range(2*n - 1):
+        for j in range(2*n - 1):
+            hex = Hexagon()
+            hex.x = i
+            hex.y = j
+            board.append(hex)
+
+    deleted = []
+    for i in range(0,n-1):
+        for j in range(n,2*n-1):
+            if i <= j-n:
+                deleted.append((i,j))
+    for i in range(n, 2*n-1):
+        for j in range(0,n-1):
+            if j <= i-n:
+                deleted.append((i,j))
+
+    for coordiante in deleted:
+        for hexagon in board:
+            if hexagon.x == coordiante[0] and hexagon.y == coordiante[1]:
+                board.remove(hexagon)
+    # print(deleted)
+    return board
+```
+b. Generate a new valid game based on the customization using backtracking algorithm. Notice in each recursive, we select a random place method and once there is a place combination can run to the final, it will directly ouput as a board. **So that's why I see even though you input same parameters, it will give you different game boards at each time.** If all the methods have been checked wrong, return false. 
+```
+def place(board, ship_list, i=0):
+    """
+    backtracking to
+    1.judge the input
+    2.and if the ships can be placed on, return board with ships on
+    :param board: game board
+    :param ship_list: [5,...,4,...,3...,2...]  5:1 4:2 3:1 2:0  [5,4,4,3]
+    :param i: count variable;indicates the depth/length
+    :return: if feasible,return gameboard with randomly
+    """
+    if i == len(ship_list): # All ships are on board. Return true / recursion exit
+        return True
+
+    method = place_methods_formatted(find_possible_position(ship_list[i], board))
+    # All possible placing methods of a certain length of ship on the current board
+    l = len(method)
+    if l > 0:
+        for count in range(l):
+            m = random.sample(method, 1)[0] # randomly select a place method 
+            board = place_ship(m[0], m[1], m[2], m[3], board)
+
+            if not place(board, ship_list, i+1): # recursion entry
+                board = remove_ship(m[0], m[1], m[2], m[3], board) # if not, remove ship
+                method.remove(m) # and remove this method to prevent repetition
+            else:
+                return board
+
+    return False
+
+```
