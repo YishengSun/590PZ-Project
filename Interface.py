@@ -314,9 +314,10 @@ def draw_gameboard():
     WIN_WIDTH = 60 + (3 * PLAY_SIZE - 1) * 30
     player_board = Gamerules.init_board(PLAY_SIZE)
     answer = Gamerules.place(board, ships_list)
-    num_clues = Gamerules.get_number_clues(answer)
+    
 
     if answer:
+        num_clues = Gamerules.get_number_clues(answer)
         Gamerules.show_board(board)
         clues = Gamerules.give_clue(board,PLAY_SIZE)
         frame_board = tk.Frame(window, width=WIN_WIDTH, height=WIN_HEIGHT)
