@@ -30,6 +30,7 @@ Third, because the board become a hexagon, number clues for row and col are not 
 ![ad](https://github.com/YishengSun/590PZ-Project/blob/master/example2.png)
 
 3. How to play Hexagon Battleship 
+
 download or clone --> install required libs --> run interface.py --> customize the game board size and numbers for each kind of ships --> If it is valid to put that much ships on the board, it will generate corresponding game. Else, you need to check the validity and input again. 
 
 In the game, you can see all the clues and hints which I mentioned before. You can also restart game at any time. (Notice: if you restart the game with same parameter as last time, it will generate a random valid one.) After you think you finish, press submit, it will automatically check whether you are right. 
@@ -112,3 +113,5 @@ def place(board, ship_list, i=0):
 I highly recommend you to play a small size board first because it can help you understand the rules and also this game is truely harder than your expected. I print the answer in the console every time you generating a game. GLHF!
 
 ![ad](https://github.com/YishengSun/590PZ-Project/blob/master/example3.png)
+
+Written by Yisheng Sun 12/12/2019
