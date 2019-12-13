@@ -31,11 +31,12 @@ Third, because the board become a hexagon, number clues for row and col are not 
 
 3. How to play Hexagon Battleship 
 
-download or clone --> install required libs --> run interface.py --> customize the game board size and numbers for each kind of ships --> If it is valid to put that much ships on the board, it will generate corresponding game. Else, you need to check the validity and input again. 
+download or clone --> install required libs --> run interface.py --> customize the game board size and numbers for each kind of ships --> If it is valid to put that many ships on the board, it will generate corresponding game. Else, you need to check the validity and input again. 
 
 In the game, you can see all the clues and hints which I mentioned before. You can also restart game at any time. (Notice: if you restart the game with same parameter as last time, it will generate a random valid one.) After you think you finish, press submit, it will automatically check whether you are right. 
 
 4. two parts of core codes
+
 a. Define the small hexagon cell as a class, store them as an edited list. (like a suqare been cut off the rightup and left down corner)
 ```
 class Hexagon:
@@ -78,7 +79,7 @@ def init_board(n):
     # print(deleted)
     return board
 ```
-b. Generate a new valid game based on the customization using backtracking algorithm. Notice in each recursive, we select a random place method and once there is a place combination can run to the final, it will directly ouput as a board. **So that's why I see even though you input same parameters, it will give you different game boards at each time.** If all the methods have been checked wrong, return false. 
+b. Generate a new valid game based on the customization using backtracking algorithm. Notice in each recursive, we select a random place method and once there is a place combination can run to the final, it will directly ouput as a board. **So that's why I say even though you input same parameters, it will give you different game boards at each time.** If all the methods have been checked wrong, return false. 
 ```
 def place(board, ship_list, i=0):
     """
